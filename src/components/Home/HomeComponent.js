@@ -96,7 +96,9 @@ class Home extends Component {
   };
 
   render() {
-    let { goingUp } = this.state;
+    let { goingUp, tableList } = this.state;
+
+    const displayArr = [...tableList];
     return (
       <div className="Home">
         <Container>
@@ -158,7 +160,7 @@ class Home extends Component {
             <b>Date Time</b>
           </Col>
         </Row>
-        {this.state.tableList.reverse().map((item, index) => {
+        {displayArr.reverse().map((item, index) => {
           return (
             <Row key={`${index}`}>
               <Col>{item.currentPassengers}</Col>
