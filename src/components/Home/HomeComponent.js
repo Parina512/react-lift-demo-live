@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Lift from "../Lift/LiftComponent";
 import Passenger from "../Passenger/PassengerComponent";
-import { Container, Col, Row, Alert } from "react-bootstrap";
+import { Container, Col, Row, Alert, Button } from "react-bootstrap";
 import "../../../node_modules/@fortawesome/fontawesome-free/js/all";
 import "../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "./Home.scss";
@@ -77,7 +77,7 @@ class Home extends Component {
     );
 
     // saving into local storage
-    const table = localStorage.getItem("table");
+    let table = localStorage.getItem("table");
     let list = [];
     if (table) {
       list = JSON.parse(table);
@@ -86,11 +86,12 @@ class Home extends Component {
       currentPassengers: currentPassengers + 1,
       toFloor: currentLiftFloor + 1,
       fromFloor: lastLiftFloor + 1,
-      date: JSON.stringify(new Date()),
+      date: new Date(),
     });
-    localStorage.setItem("table", JSON.stringify(list));
+    table = JSON.stringify(list);
+    localStorage.setItem("table", table);
     this.setState({
-      tableList: list,
+      tableList: JSON.parse(localStorage.getItem("table")),
     });
   };
 
@@ -133,6 +134,17 @@ class Home extends Component {
         </Container>
 
         <Row>
+          <Button
+            variant="danger"
+            onClick={() => {
+              localStorage.removeItem("table");
+              this.setState({ tableList: [] });
+            }}
+          >
+            Reset table
+          </Button>
+        </Row>
+        <Row>
           <Col>
             <b>No. Passangers</b>
           </Col>
@@ -146,7 +158,7 @@ class Home extends Component {
             <b>Date Time</b>
           </Col>
         </Row>
-        {this.state.tableList.map((item, index) => {
+        {this.state.tableList.reverse().map((item, index) => {
           return (
             <Row key={`${index}`}>
               <Col>{item.currentPassengers}</Col>
