@@ -27,11 +27,7 @@ class Passenger extends Component {
       return (
         <span key={`${key}`}>
           <Button
-            variant={
-              currentPassengers && currentPassengers >= key
-                ? "success"
-                : "secondary"
-            }
+            variant={currentPassengers >= key ? "success" : "secondary"}
             disabled={isDisable}
             onClick={
               !isDisable ? () => this.props.onSelectPassenger(key) : () => {}

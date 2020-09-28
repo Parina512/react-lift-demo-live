@@ -16,7 +16,7 @@ class Home extends Component {
       goingUp: true,
       isPassangeListAvailable: true,
       isLiftListAvailable: false,
-      currentPassengers: 0,
+      currentPassengers: -1,
       currentLiftFloor: -1,
       lastLiftFloor: -1,
       tempFloor: -1,
@@ -49,7 +49,7 @@ class Home extends Component {
           tempFloor: currentLiftFloor,
           isPassangeListAvailable: true,
           isLiftListAvailable: false,
-          currentPassengers: 0,
+          currentPassengers: -1,
         });
       } else {
         this.setState({
